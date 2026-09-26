@@ -20,7 +20,8 @@ export function LikenessIndicator({ scores }: { scores: Record<string, number> }
         <summary className="cursor-pointer py-2">How matching works</summary>
         <p className="max-w-prose pb-2 leading-relaxed">
           The score compares the nine core traits with hand-written profiles. A higher percentage
-          means the settings are closer. It isn't a probability or an official assessment. Optional
+          means the settings are closer. Scores are directional comparisons without probability or
+          official assessment. Optional
           and custom traits aren't included.
         </p>
         <p className="mb-2 font-semibold">

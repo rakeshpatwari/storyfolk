@@ -201,11 +201,11 @@ export function buildPortrait(
   if (perf >= 4 && cold >= 3)
     backstory.push(`A childhood where love was graded. Excellence was safety; a B-minus was weather turning.`);
   if (intel >= 4 && charisma <= 2)
-    backstory.push(`Skipped a social grade. Learned to win rooms on the page, not in the hallway.`);
+    backstory.push(`Skipped a social grade. Learned to win rooms on the page after failing in hallways.`);
   if (sel >= 4)
     backstory.push(`Grief, guilt, or a forbidden attachment was too large to feel in public. ${p.subj[0].toUpperCase()}${p.subj.slice(1)} built walls with doors only ${p.subj} can find.`);
   if (ecc >= 4)
-    backstory.push(`Grew up slightly out of phase with the local culture. The eccentricity is a native language, not a costume.`);
+    backstory.push(`Grew up slightly out of phase with the local culture. The eccentricity is a native language ${p.subj} speaks fluently.`);
   if (drive >= 4 && s(scores, "ambition") >= 4)
     backstory.push(`Saw a ceiling in class, city, or family early and decided that staying under it was failure.`);
   if (cold >= 4)
@@ -213,7 +213,7 @@ export function buildPortrait(
   if (crea >= 4 && anal <= 2)
     backstory.push(`Rewarded for sparks, never for finishing. Method feels like a cage ${p.subj} ${p.verb === "are" ? "still" : "still"} refuses.`);
   if (backstory.length === 0)
-    backstory.push(`Let the highest trait be a scar, not a gift: who taught ${p.obj} to be this way, and what did it cost?`);
+    backstory.push(`Treat the highest trait as a scar. Identify who taught ${p.obj} to be this way and what it cost.`);
   backstory.push(`Give one ordinary loyalty (a sibling, a teacher, a street, a craft) so the extremes have somewhere to land.`);
 
   const relationships: string[] = [];

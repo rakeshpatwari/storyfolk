@@ -103,7 +103,7 @@ export const CORE_TRAITS: TraitDef[] = [
   {
     id: "coldness",
     name: "Psychopathic traits",
-    short: "A fictional empathy, fear, and remorse spectrum. This isn't a diagnosis.",
+    short: "A fictional scale for empathy, fear, and remorse. For character writing only; no clinical meaning.",
     group: "affect",
     steps: [
       "Highly empathic. Strongly affected by other people's feelings and pain.",
