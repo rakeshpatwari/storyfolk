@@ -62,30 +62,30 @@ function pickArchetype(sc: Scores, p: ReturnType<typeof pronounSet>) {
   const moral = s(sc, "moral", 0);
 
   if (cold >= 4 && charisma >= 4 && sel >= 4)
-    return `The vaulted magnet — charm on the surface, feeling locked to one domain`;
+    return `The vaulted magnet: charm on the surface, feeling locked to one domain`;
   if (intel >= 4 && anal >= 4 && crea <= 2)
-    return `The cold strategist — high horsepower, low invention, lethal at systems`;
+    return `The cold strategist: quick mind, low invention, lethal at systems`;
   if (intel >= 4 && crea >= 4 && anal <= 2)
-    return `The visionary eccentric — sees the new world, hates the spreadsheet`;
+    return `The visionary eccentric: sees the new world, hates the spreadsheet`;
   if (intel >= 4 && crea >= 4 && anal >= 4)
-    return `The complete mind — rare cognitive triangle at full tension`;
+    return `The complete mind: a rare cognitive triangle at full tension`;
   if (perf >= 4 && drive >= 4)
-    return `The relentless artisan — will not stop, will not ship dirty`;
+    return `The relentless artisan: won't stop and won't ship dirty`;
   if (ecc >= 4 && crea >= 4)
-    return `The untranslated genius — brilliant in a dialect almost nobody speaks`;
+    return `The untranslated genius: brilliant in a dialect almost nobody speaks`;
   if (charisma <= 2 && intel >= 4)
-    return `The isolated intellect — the room does not love ${p.obj}; the work might`;
+    return `The isolated intellect: the room doesn't love ${p.obj}; the work might`;
   if (charisma >= 4 && drive >= 4 && cold <= 2)
-    return `The warm engine — pulls people along on genuine heat`;
+    return `The warm engine: pulls people along on genuine heat`;
   if (moral >= 4 && amb >= 4)
-    return `The climber with no banister — hungry and unfenced`;
+    return `The climber with no banister: hungry and unfenced`;
   if (cold >= 4 && charisma <= 2)
-    return `The winter blade — low warmth, low performance, high cut`;
+    return `The winter blade: low warmth, low performance, high cut`;
   if (sel >= 4 && cold <= 2)
-    return `The private storm — feels everything, shows almost none of it`;
+    return `The private storm: feels everything, shows almost none of it`;
   if (drive <= 2 && intel >= 4)
-    return `The unused instrument — the mind is there; the fire is not`;
-  return `The forming figure — push two traits to the edges to lock an archetype`;
+    return `The unused instrument: a strong mind without the will to use it`;
+  return `The forming figure: push two traits to the edges to lock an archetype`;
 }
 
 export function buildPortrait(
@@ -118,32 +118,32 @@ export function buildPortrait(
   const archetype = pickArchetype(scores, p);
 
   const cogBits: string[] = [];
-  if (intel >= anal && intel >= crea) cogBits.push("leads with raw intellect");
-  if (anal > intel && anal >= crea) cogBits.push("leads with dissection");
-  if (crea > intel && crea > anal) cogBits.push("leads with invention");
+  if (intel >= anal && intel >= crea) cogBits.push("Leads with raw intellect");
+  if (anal > intel && anal >= crea) cogBits.push("Leads with dissection");
+  if (crea > intel && crea > anal) cogBits.push("Leads with invention");
   if (Math.abs(intel - anal) <= 1 && Math.abs(anal - crea) <= 1)
-    cogBits.push("the three cognitive legs are nearly even — a balanced, less spiky mind");
+    cogBits.push("The three cognitive traits are nearly even, which makes the mind balanced but less distinctive");
   else if (intel >= 4 && anal >= 4 && crea <= 2)
-    cogBits.push("classic cold triangle: horsepower + rigor, thin originality");
+    cogBits.push("Classic cold triangle: quick thinking and rigor with little originality");
   else if (intel >= 4 && crea >= 4 && anal <= 2)
-    cogBits.push("visionary triangle: horsepower + novelty, thin method");
+    cogBits.push("Visionary triangle: quick thinking and novelty with little method");
   else if (anal >= 4 && crea >= 4 && intel <= 2)
-    cogBits.push("craftsman’s triangle: method + invention without towering IQ — still dangerous in a niche");
+    cogBits.push("Craftsman's triangle: method and invention without towering intellect, still dangerous in a niche");
 
   const intensity =
     spread >= 1.35
-      ? `High-contrast profile (spread ${spread.toFixed(1)}). Contradictions will carry scenes — lean into the clash between peaks and valleys.`
+      ? `High-contrast profile (spread ${spread.toFixed(1)}). Let the clash between peaks and valleys carry scenes.`
       : mean >= 4
         ? `Hot profile (mean ${mean.toFixed(1)}). Almost everything is turned up; give ${p.obj} one human incompetence so the reader can breathe.`
         : mean <= 2.4
-          ? `Quiet profile (mean ${mean.toFixed(1)}). Either a still-water character or one who has not been specified yet — raise two traits if you want plot torque.`
+          ? `Quiet profile (mean ${mean.toFixed(1)}). This may be a still-water character or an unfinished one. Raise two traits to create more plot pressure.`
           : `Moderated profile (mean ${mean.toFixed(1)}, spread ${spread.toFixed(1)}). Believable, but a little safe. Push one peak and one valley to make ${p.obj} memorable.`;
 
-  const oneLiner = `${display} (${role}) — ${archetype.toLowerCase()}.`;
+  const oneLiner = `${display} (${role}): ${archetype.toLowerCase()}.`;
 
   const portraitParts: string[] = [];
   portraitParts.push(
-    `${display} ${p.verb} built to be read at a glance as ${archetype.split("—")[0].trim().toLowerCase()}, then complicated on the second look.`,
+    `${display} first reads as ${archetype.split(":")[0].trim().toLowerCase()}. A second look should complicate that impression.`,
   );
   if (charisma >= 4 && cold >= 4) {
     portraitParts.push(
@@ -158,14 +158,14 @@ export function buildPortrait(
   }
   if (sel >= 4) {
     portraitParts.push(
-      `Feeling is not absent — it is rationed. The reader should see weather only in the one room ${p.subj} ${p.verb === "are" ? "have" : "has"} not locked.`,
+      `Feeling is rationed. The reader should see weather only in the one room ${p.subj} ${p.verb === "are" ? "have" : "has"} left unlocked.`,
     );
   } else if (sel <= 2 && cold <= 2) {
     portraitParts.push(`Emotion leaks. Scenes will know how ${p.subj} ${p.verb} doing whether ${p.subj} ${p.verb === "are" ? "want" : "wants"} that or not.`);
   }
   if (perf >= 4) {
     portraitParts.push(
-      `Flaw is an insult. Drafts, people, and plans get sanded until something — or someone — snaps.`,
+      `Flaw is an insult. Drafts, people, and plans get sanded until something or someone snaps.`,
     );
   }
   if (ecc >= 4) {
@@ -181,19 +181,19 @@ export function buildPortrait(
 
   const behaviors: string[] = [];
   if (anal >= 4) behaviors.push(`Rewrites a crisis as a diagram before ${p.subj} ${p.verb === "are" ? "move" : "moves"}.`);
-  if (crea >= 4) behaviors.push(`Solves sideways — changes the question instead of answering it.`);
+  if (crea >= 4) behaviors.push(`Solves sideways by changing the question instead of answering it.`);
   if (perf >= 4) behaviors.push(`Cannot leave a crooked picture, a sloppy sentence, or a half-done plan.`);
-  if (cold >= 4) behaviors.push(`Names other people’s pain accurately and does not pick it up.`);
+  if (cold >= 4) behaviors.push(`Names other people's pain accurately without picking it up.`);
   if (sel >= 4) behaviors.push(`Goes still when others would cry, shout, or reach. The tell is absence.`);
   if (charisma >= 4) behaviors.push(`Holds eye contact a beat too long; people fill the silence with loyalty.`);
-  if (ecc >= 4) behaviors.push(`Keeps a private system — hours, food, objects, words — that others treat as a joke until it isn’t.`);
+  if (ecc >= 4) behaviors.push(`Keeps a private system for hours, food, objects, and words. Others dismiss it until it matters.`);
   if (drive >= 4) behaviors.push(`Shows up early, stays late, forgets to eat, treats sleep as optional.`);
   if (s(scores, "humor") >= 4) behaviors.push(`Uses the joke as a blade or a door. Watch who is allowed to laugh with ${p.obj}.`);
   if (s(scores, "loyalty") >= 4) behaviors.push(`Will take a wound for a named few and shrug at the rest of the world.`);
   if (s(scores, "possessiveness") >= 4) behaviors.push(`Tracks who looked at whom. Access is love.`);
   if (s(scores, "moral") >= 4) behaviors.push(`Crosses lines in private, then writes a cleaner story of the crossing.`);
   if (behaviors.length < 3) {
-    behaviors.push(`Default mode: ${nameOf(ranked[0].id, traits)} at ${ranked[0].score}/5 leaks into ordinary tasks.`);
+    behaviors.push(`${nameOf(ranked[0].id, traits)} at ${ranked[0].score}/5 shapes even ordinary tasks.`);
     if (valleys[0]) behaviors.push(`Avoids or fails at anything that needs ${valleys[0].name.toLowerCase()}.`);
   }
 
@@ -203,11 +203,11 @@ export function buildPortrait(
   if (intel >= 4 && charisma <= 2)
     backstory.push(`Skipped a social grade. Learned to win rooms on the page, not in the hallway.`);
   if (sel >= 4)
-    backstory.push(`Something was too large to feel in public — grief, guilt, or a forbidden attachment — so ${p.subj} built walls with doors only ${p.subj} can find.`);
+    backstory.push(`Grief, guilt, or a forbidden attachment was too large to feel in public. ${p.subj[0].toUpperCase()}${p.subj.slice(1)} built walls with doors only ${p.subj} can find.`);
   if (ecc >= 4)
     backstory.push(`Grew up slightly out of phase with the local culture. The eccentricity is a native language, not a costume.`);
   if (drive >= 4 && s(scores, "ambition") >= 4)
-    backstory.push(`Saw a ceiling early — class, city, family — and decided the only moral failure was staying under it.`);
+    backstory.push(`Saw a ceiling in class, city, or family early and decided that staying under it was failure.`);
   if (cold >= 4)
     backstory.push(`Either never wired for easy empathy, or had it trained out by a job, a war, a house that punished softness.`);
   if (crea >= 4 && anal <= 2)
@@ -226,21 +226,21 @@ export function buildPortrait(
   if (perf >= 4)
     relationships.push(`Loved ones are edited. Kindness can look like a mark-up.`);
   if (s(scores, "loyalty") >= 4)
-    relationships.push(`Once in, they do not leave. The danger is who gets to be ‘in’.`);
+    relationships.push(`Once in, they don't leave. The danger is who earns that place.`);
   if (s(scores, "possessiveness") >= 4)
     relationships.push(`Romance and rivalry will rhyme. Attention is a scarce resource ${p.subj} ${p.verb === "are" ? "ration" : "rations"}.`);
   if (cold <= 2 && charisma >= 3)
     relationships.push(`Easy to trust, easy to bruise. Other characters will use that, or protect it.`);
   if (relationships.length === 0)
-    relationships.push(`Match ${p.obj} with someone who scores opposite on the peak trait — friction without a villain speech.`);
+    relationships.push(`Match ${p.obj} with someone who scores opposite on the peak trait. The difference creates friction without a villain speech.`);
 
   const conflicts: string[] = [];
   if (perf >= 4 && drive >= 4)
     conflicts.push(`Internal: the work is never done, so the life is never allowed to start.`);
   if (cold >= 4 && sel >= 4)
-    conflicts.push(`Internal: the one thing ${p.subj} ${p.verb === "are" ? "cannot" : "cannot"} freeze will be the plot’s lever.`);
+    conflicts.push(`Internal: the one thing ${p.subj} cannot freeze will become the plot's lever.`);
   if (intel >= 4 && crea >= 4 && anal <= 2)
-    conflicts.push(`External: institutions that demand proof, process, and patience — all of which bore or offend ${p.obj}.`);
+    conflicts.push(`External: institutions demand proof, process, and patience. Each demand bores or offends ${p.obj}.`);
   if (charisma >= 4)
     conflicts.push(`External: a crowd, a court, or a company that wants the performance more than the person.`);
   if (s(scores, "moral") >= 4)
@@ -248,7 +248,7 @@ export function buildPortrait(
   if (spread >= 1.3)
     conflicts.push(`The character vs. ${p.self}: peaks and valleys want different endings. Let both almost win.`);
   if (conflicts.length < 2)
-    conflicts.push(`Put ${p.obj} in a scene that can only be solved by the valley trait — the thing ${p.subj} ${p.verb === "are" ? "are" : "is"} worst at.`);
+    conflicts.push(`Give ${p.obj} a problem that requires the valley trait, the quality ${p.subj} ${p.verb === "are" ? "are" : "is"} worst at.`);
 
   const voice: string[] = [];
   if (anal >= 4) voice.push(`Precise nouns, few adjectives, arguments in numbered beats even when speaking.`);
@@ -268,7 +268,7 @@ export function buildPortrait(
       `A planning scene is a cognitive x-ray: intellect finds the pattern, analysis stress-tests it, creativity offers the illegal third option.`,
     );
   if (sel >= 4)
-    scenes.push(`Give the reader one private room — a letter, a body, a grave, a piece of music — where the scale on selective emotionality pays off.`);
+    scenes.push(`Give the reader one private room where selective emotionality pays off: a letter, a body, a grave, or a piece of music.`);
   scenes.push(`End a chapter on a choice that is consistent with the scales and still costs ${p.obj} something ${p.subj} ${p.verb === "are" ? "want" : "wants"}.`);
 
   return {
@@ -277,7 +277,9 @@ export function buildPortrait(
     archetype,
     oneLiner,
     intensity,
-    cognitive: cogBits.join(" ") || "Adjust intellect, analytical rigor, and creativity to shape the triangle.",
+    cognitive: cogBits.length
+      ? `${cogBits.join(". ")}.`
+      : "Adjust intellect, analytical rigor, and creativity to shape the triangle.",
     portrait: portraitParts.join(" "),
     behaviors: behaviors.slice(0, 6),
     backstory: backstory.slice(0, 4),
@@ -295,33 +297,33 @@ export function buildPortrait(
 export function dossierText(port: Portrait, traits: TraitDef[], scores: Scores) {
   const lines = [
     port.name,
-    `${port.role} — ${port.archetype}`,
+    `${port.role}: ${port.archetype}`,
     "",
     port.portrait,
     "",
     "Scales",
-    ...traits.map((t) => `• ${t.name}: ${s(scores, t.id)}/5 — ${t.steps[s(scores, t.id) - 1]}`),
+    ...traits.map((t) => `- ${t.name}: ${s(scores, t.id)}/5. ${t.steps[s(scores, t.id) - 1]}`),
     "",
     "Cognitive triangle",
     port.cognitive,
     "",
-    "Behaviors",
-    ...port.behaviors.map((x) => `• ${x}`),
+    "Behaviors in a scene",
+    ...port.behaviors.map((x) => `- ${x}`),
     "",
-    "Backstory seeds",
-    ...port.backstory.map((x) => `• ${x}`),
+    "Backstory leads",
+    ...port.backstory.map((x) => `- ${x}`),
     "",
     "Relationships",
-    ...port.relationships.map((x) => `• ${x}`),
+    ...port.relationships.map((x) => `- ${x}`),
     "",
     "Conflict",
-    ...port.conflicts.map((x) => `• ${x}`),
+    ...port.conflicts.map((x) => `- ${x}`),
     "",
     "Voice",
-    ...port.voice.map((x) => `• ${x}`),
+    ...port.voice.map((x) => `- ${x}`),
     "",
-    "Scene uses",
-    ...port.scenes.map((x) => `• ${x}`),
+    "Scene prompts",
+    ...port.scenes.map((x) => `- ${x}`),
   ];
   return lines.join("\n");
 }

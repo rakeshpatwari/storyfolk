@@ -17,14 +17,14 @@ export function LikenessIndicator({ scores }: { scores: Record<string, number> }
         ))}
       </div>
       <details className="mt-2 text-xs text-muted">
-        <summary className="cursor-pointer py-2">How is this compared?</summary>
+        <summary className="cursor-pointer py-2">How matching works</summary>
         <p className="max-w-prose pb-2 leading-relaxed">
-          Illustrative resemblance across the nine core traits, using hand-authored character
-          profiles. Higher percentages mean closer trait settings, not a probability or an official
-          character assessment. Optional and custom traits don’t affect these matches.
+          The score compares the nine core traits with hand-written profiles. A higher percentage
+          means the settings are closer. It isn't a probability or an official assessment. Optional
+          and custom traits aren't included.
         </p>
         <p className="mb-2 font-semibold">
-          Compared with {CANON.length} characters, including Telugu and Hindi cinema
+          Compared with {CANON.length} characters from international, Telugu, and Hindi cinema
         </p>
         <ul className="grid gap-2 sm:grid-cols-2">
           {CANON.map((figure) => (

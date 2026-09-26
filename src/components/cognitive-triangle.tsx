@@ -50,8 +50,7 @@ export function CognitiveTriangle({ scores }: { scores: Record<string, number> }
             Cognitive triangle
           </h2>
           <p className="mt-1 text-sm text-muted">
-            Intellect, analytical rigor, and creativity. The inner figure stretches toward whichever
-            leg is loudest. The dot is the balance of the three.
+            The shape leans toward the strongest mental trait. The dot marks the balance point.
           </p>
         </div>
       </div>

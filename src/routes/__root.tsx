@@ -16,7 +16,7 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "Build any fictional character from 1–5 trait scales, then read the portrait, cognitive triangle, and story seeds.",
+          "Build a fictional character from 1-5 trait scales, then read the portrait, cognitive triangle, and story leads.",
       },
       { name: "theme-color", content: "#f5f5f7" },
     ],

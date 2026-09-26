@@ -77,12 +77,12 @@ export function DossierPanel({
 
       <LikenessIndicator scores={scores} />
 
-      <Section title="Behaviors on the page" items={portrait.behaviors} />
-      <Section title="Backstory seeds" items={portrait.backstory} />
+      <Section title="Behaviors in a scene" items={portrait.behaviors} />
+      <Section title="Backstory leads" items={portrait.backstory} />
       <Section title="Relationships" items={portrait.relationships} />
-      <Section title="Conflict engines" items={portrait.conflicts} />
+      <Section title="Conflict" items={portrait.conflicts} />
       <Section title="Voice" items={portrait.voice} />
-      <Section title="Scene uses" items={portrait.scenes} />
+      <Section title="Scene prompts" items={portrait.scenes} />
     </div>
   );
 }

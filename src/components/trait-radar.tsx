@@ -24,7 +24,7 @@ export function TraitRadar({
     <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)] sm:p-5">
       <h2 className="font-display text-xl font-semibold tracking-tight text-fg">Scale map</h2>
       <p className="mt-1 text-sm text-muted">
-        Every active trait on one radar. Spikes are the character the reader will remember.
+        See the full trait profile. Sharp peaks tend to define the character on the page.
       </p>
       <div className="mt-2 h-72 w-full">
         <ResponsiveContainer width="100%" height="100%">

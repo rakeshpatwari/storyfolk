@@ -12,7 +12,7 @@ export const CORE_TRAITS: TraitDef[] = [
   {
     id: "perfectionism",
     name: "Perfectionism",
-    short: "How they treat flaws, drafts, and ‘good enough’.",
+    short: "How they treat flaws, drafts, and work that is merely good enough.",
     group: "drive",
     steps: [
       "Casual. Accepts good enough, improvises, and can live with visible flaws.",
@@ -25,7 +25,7 @@ export const CORE_TRAITS: TraitDef[] = [
   {
     id: "intellect",
     name: "Intellect",
-    short: "Raw cognitive horsepower — how fast and far they think.",
+    short: "How quickly they grasp ideas and how far they follow them.",
     group: "cognitive",
     steps: [
       "Average or below. Complex or abstract ideas are a struggle.",
@@ -77,7 +77,7 @@ export const CORE_TRAITS: TraitDef[] = [
   {
     id: "charisma",
     name: "Charisma",
-    short: "The gravity of their presence — pull, not niceness.",
+    short: "How strongly their presence pulls people in.",
     group: "social",
     steps: [
       "Flat or actively off-putting. Rooms cool when they enter.",
@@ -103,10 +103,10 @@ export const CORE_TRAITS: TraitDef[] = [
   {
     id: "coldness",
     name: "Psychopathic traits",
-    short: "Fictional empathy / fear / remorse spectrum — not a diagnosis.",
+    short: "A fictional empathy, fear, and remorse spectrum. This isn't a diagnosis.",
     group: "affect",
     steps: [
-      "Highly empathic. Strongly affected by others’ feelings and harm.",
+      "Highly empathic. Strongly affected by other people's feelings and pain.",
       "Normally empathic, with occasional useful detachment.",
       "Selective or controlled empathy. Can switch it off when useful.",
       "Markedly low empathy and emotional reactivity. Calculates more than feels.",
@@ -137,7 +137,7 @@ export const OPTIONAL_TRAITS: TraitDef[] = [
     steps: [
       "Content with a small orbit. Status and legacy barely register.",
       "Wants a good life, not a throne.",
-      "Clearly wants more — rank, craft, love, or power — and will work for it.",
+      "Clearly wants greater rank, mastery, love, or power, and will work for it.",
       "Hungry. Measures the room by who is above them.",
       "All-consuming. Will burn bridges, rest, and sometimes people to climb.",
     ],
@@ -178,7 +178,7 @@ export const OPTIONAL_TRAITS: TraitDef[] = [
       "Recovers, but slowly, and with visible scars.",
       "Bounces back in a normal human rhythm.",
       "Hard to keep down. Uses pain as fuel more often than not.",
-      "Almost unbreakable — or so numb that collapse is delayed, not absent.",
+      "Almost unbreakable. Numbness may delay the collapse rather than prevent it.",
     ],
   },
   {

@@ -61,7 +61,7 @@ export function TraitScale({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
       >
-        <span>All five meanings</span>
+        <span>All five levels</span>
         <ChevronDown
           className={cn(
             "size-4 transition-transform duration-[var(--motion-quick)]",

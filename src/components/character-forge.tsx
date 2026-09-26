@@ -1,6 +1,17 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useMemo, useState } from "react";
-import { Check, CopyPlus, Library, Plus, RotateCcw, Save, Trash2, X } from "lucide-react";
+import {
+  Check,
+  CopyPlus,
+  FileDown,
+  Library,
+  LoaderCircle,
+  Plus,
+  RotateCcw,
+  Save,
+  Trash2,
+  X,
+} from "lucide-react";
 import { CognitiveTriangle } from "@/components/cognitive-triangle";
 import { DossierPanel } from "@/components/dossier-panel";
 import { TraitRadar } from "@/components/trait-radar";
@@ -10,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { activeTraits, useForge } from "@/lib/character-store";
+import { exportDossierPdf } from "@/lib/export-pdf";
 import { buildPortrait, dossierText } from "@/lib/portrait";
 import { OPTIONAL_TRAITS, PRONOUNS, ROLES } from "@/lib/traits";
 import { cn } from "@/lib/utils";
@@ -18,6 +30,7 @@ export function CharacterForge() {
   const store = useForge();
   const [libraryOpen, setLibraryOpen] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [pdfState, setPdfState] = useState<"idle" | "exporting" | "done" | "error">("idle");
   const [customName, setCustomName] = useState("");
   const [hydrated, setHydrated] = useState(false);
 
@@ -50,7 +63,7 @@ export function CharacterForge() {
   if (!hydrated || !character || !portrait) {
     return (
       <div className="flex min-h-dvh items-center justify-center bg-bg text-muted">
-        Opening the ledger…
+        Opening Storyfolk...
       </div>
     );
   }
@@ -72,11 +85,28 @@ export function CharacterForge() {
     }
   };
 
+  const exportPdf = async () => {
+    setPdfState("exporting");
+    try {
+      await exportDossierPdf({
+        character: live,
+        portrait: port,
+        traits,
+        scores: live.scores,
+      });
+      setPdfState("done");
+    } catch (error) {
+      console.error("Storyfolk PDF export failed", error);
+      setPdfState("error");
+    }
+    window.setTimeout(() => setPdfState("idle"), 2400);
+  };
+
   return (
     <main className="forge-shell mx-auto max-w-7xl px-4 py-6 sm:px-6">
       <header className="storyfolk-header">
         <h1 className="text-4xl font-semibold tracking-tight">Storyfolk</h1>
-        <p className="mt-1 text-sm text-muted">Shape a character, one trait at a time.</p>
+        <p className="mt-1 text-sm text-muted">Build a character from choices that shape the page.</p>
       </header>
       <div className="forge-workspace">
         <aside className="forge-header character-sidebar" aria-label="Character settings">
@@ -123,9 +153,33 @@ export function CharacterForge() {
               >
                 <Library className="size-4" />
               </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                aria-label="Export dossier as PDF"
+                title="Export dossier as PDF"
+                disabled={pdfState === "exporting"}
+                onClick={() => void exportPdf()}
+              >
+                {pdfState === "exporting" ? (
+                  <LoaderCircle className="size-4 animate-spin" />
+                ) : pdfState === "done" ? (
+                  <Check className="size-4" />
+                ) : (
+                  <FileDown className="size-4" />
+                )}
+              </Button>
             </div>
             <p className="mt-2 text-xs text-muted" role="status">
-              {saved ? "Saved to this browser." : "Automatically saved in this browser."}
+              {pdfState === "exporting"
+                ? "Building the PDF..."
+                : pdfState === "done"
+                  ? "PDF downloaded."
+                  : pdfState === "error"
+                    ? "PDF export failed. Try again."
+                    : saved
+                      ? "Saved in this browser."
+                      : "Changes save in this browser."}
             </p>
             {libraryOpen && (
               <div className="mt-4">
@@ -156,7 +210,7 @@ export function CharacterForge() {
                   Customize
                 </h2>
                 <p className="mt-1 text-sm text-muted">
-                  {traits.length} traits · Adjust a scale to update the character.
+                  {traits.length} traits. Move a scale and the dossier responds.
                 </p>
               </div>
               <Button variant="ghost" onClick={() => store.resetScores()}>
@@ -189,8 +243,7 @@ export function CharacterForge() {
             <section className="mt-6 rounded-xl bg-surface p-4 shadow-[var(--shadow-border)] sm:p-5">
               <h2 className="font-display text-xl font-semibold text-fg">Catalog</h2>
               <p className="mt-1 text-sm text-muted">
-                Optional scales sit in the same 1–5 league. Custom ones let you name whatever the
-                story needs.
+                Add a ready-made trait or write one for this story.
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {OPTIONAL_TRAITS.map((t) => {
@@ -224,7 +277,7 @@ export function CharacterForge() {
                 <Input
                   value={customName}
                   onChange={(e) => setCustomName(e.target.value)}
-                  placeholder="Custom scale name — e.g. Faith, Vanity, Courage"
+                  placeholder="Custom trait, such as faith or vanity"
                   aria-label="Custom scale name"
                 />
                 <Button type="submit" variant="secondary" className="sm:w-auto">
@@ -298,7 +351,7 @@ function IdentityForm() {
               Notes for {character.name || "this character"}
             </Dialog.Title>
             <Dialog.Description className="mt-1 text-sm text-muted">
-              Private details, saved automatically in this browser.
+              Keep details you don't want in the main dossier. They stay in this browser.
             </Dialog.Description>
             <div className="mt-5">
               <Label htmlFor="gender">Gender</Label>
@@ -317,7 +370,7 @@ function IdentityForm() {
                 autoFocus
                 className="mt-1.5 min-h-48"
                 value={character.notes}
-                placeholder="Age, occupation, secret, the one thing they want…"
+                placeholder="Age, occupation, secret, or private motive"
                 onChange={(e) => patch({ notes: e.target.value })}
               />
             </div>

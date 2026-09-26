@@ -4,6 +4,8 @@ dist/
 .vercel/output/
 .tanstack/
 screenshots/
+output/
+tmp/
 .grok/
 .vercel/
 attachments/
