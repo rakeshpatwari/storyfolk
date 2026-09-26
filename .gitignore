@@ -1,0 +1,16 @@
+node_modules/
+.output/
+dist/
+.vercel/output/
+.tanstack/
+screenshots/
+.grok/
+.vercel/
+attachments/
+artifacts/
+.agents/
+.project_id
+.node_modules.lock
+AGENTS.md
+.DS_Store
+npm-debug.log*
